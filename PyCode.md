@@ -40,10 +40,33 @@ ORDER BY
     price DESC;
 """
 
-# Execute the query
+### Execute the query
 result_df = sqldf(query, globals())
 
-# The result is a new Pandas DataFrame
+### The result is a new Pandas DataFrame
 print("\nSQL Query Result:")
 print(result_df)
 </code>
+
+import pandas as pd
+from google.colab import files
+
+# --- 1. Create the Excel file in the Colab session storage ---
+
+## Assuming 'df' is your final DataFrame
+# If you don't have a DataFrame, you can create one for testing:
+data = {'Name': ['Alice', 'Bob'], 'Score': [95, 88]}
+df = pd.DataFrame(data)
+
+## Save the DataFrame to a local Excel file named 'Colab_Output.xlsx'
+## Set index=False to prevent the DataFrame's row numbers from being written to the file
+file_name = 'Colab_Output.xlsx'
+df.to_excel(file_name, index=False, sheet_name='Summary_Data') 
+
+print(f"File '{file_name}' created successfully in Colab storage.")
+
+## --- 2. Trigger the download to your local machine ---
+
+files.download(file_name) 
+
+## Note: The download prompt/process may vary slightly depending on your browser.
